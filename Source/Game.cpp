@@ -27,108 +27,56 @@ void Game::makeAMove(const Direction& dir)
     }
     else
     {
+        int nextX;
+        int nextY;
         switch(dir)
         {
-            case Up:
+                case Up:
+                {
+                    nextX = snake.front().x;
+                    nextY = snake.front().y - 1;
+                    break;
+                }
+                case Down:
+                {
+                    nextX = snake.front().x;
+                    nextY = snake.front().y + 1;
+                    break;
+                }
+                case Left:
+                {
+                    nextX = snake.front().x - 1;
+                    nextY = snake.front().y;
+                    break;
+                }
+                case Right:
+                {
+                    nextX = snake.front().x + 1;
+                    nextY = snake.front().y;
+                    break;
+                }
+        }
+
+        Coord nextCoord(nextX, nextY);
+
+        if(board.movePossible(nextCoord))
+        {
+            snake.push_front(nextCoord);
+            if(!board.appleFound(nextCoord))
             {
-                Coord upCoord(snake.front().x, snake.front().y - 1);
-                if(board.movePossible(upCoord))
-                {
-                    snake.push_front(upCoord);
-                    if (!board.appleFound(upCoord))
-                    {
-                        board.clearCell(Coord(snake.at(snake.size() - 1).x, snake.at(snake.size() - 1).y));
-                        snake.erase(snake.end());
-                    }
-                    else
-                    {
-                        ++score;
-                        applePlaced = false;
-                    }
-                    previousDirection = Up;
-                }
-                else
-                {
-                    isOver = true;
-                }
-                break;
+                board.clearCell(Coord(snake.at(snake.size() - 1).x, snake.at(snake.size() - 1).y));
+                snake.erase(snake.end());
             }
-            case Down:
+            else
             {
-                Coord downCoord(snake.front().x, snake.front().y + 1);
-                if (board.movePossible(downCoord))
-                {
-                    snake.push_front(downCoord);
-                    if (!board.appleFound(downCoord))
-                    {
-                        board.clearCell(Coord(snake.at(snake.size() - 1).x, snake.at(snake.size() - 1).y));
-                        snake.erase(snake.end());
-                    }
-                    else
-                    {
-                        ++score;
-                        applePlaced = false;
-                    }
-                    previousDirection = Down;
-                }
-                else
-                {
-                    isOver = true;
-                }
-                break;
+                ++score;
+                applePlaced = false;
             }
-            case Left:
-            {
-                Coord leftCoord(snake.front().x - 1, snake.front().y);
-                if (board.movePossible(leftCoord))
-                {
-                    snake.push_front(leftCoord);
-                    if (!board.appleFound(leftCoord))
-                    {
-                        board.clearCell(Coord(snake.at(snake.size() - 1).x, snake.at(snake.size() - 1).y));
-                        snake.erase(snake.end());
-                    }
-                    else
-                    {
-                        ++score;
-                        applePlaced = false;
-                    }
-                    previousDirection = Left;
-                }
-                else
-                {
-                    isOver = true;
-                }
-                break;
-            }
-            case Right:
-            {
-                Coord rightCoord(snake.front().x + 1, snake.front().y);
-                if (board.movePossible(rightCoord))
-                {
-                    snake.push_front(rightCoord);
-                    if (!board.appleFound(rightCoord))
-                    {
-                        board.clearCell(Coord(snake.at(snake.size() - 1).x, snake.at(snake.size() - 1).y));
-                        snake.erase(snake.end());
-                    }
-                    else
-                    {
-                        ++score;
-                        applePlaced = false;
-                    }
-                    previousDirection = Right;
-                } else
-                {
-                    isOver = true;
-                }
-                break;
-            }
-            default:
-            {
-                std::cout << "DIRECTION ERROR!";
-                isOver = true;
-            }
+            previousDirection = dir;
+        }
+        else
+        {
+            isOver = true;
         }
     }
 }
