@@ -59,9 +59,9 @@ void Board::clearCell(const Coord& where)
     setCell(where, ' ');
 }
 
-bool Board::movePossible(const Coord& where)
+bool Board::checkAvailability(const Coord& where)
 {
-    return !(brd[where.y][where.x] == '#' || brd[where.y][where.x] == 's');
+    return brd[where.y][where.x] != 's' && brd[where.y][where.x] != '#' && brd[where.y][where.x] != 'S';
 }
 
 void Board::setApple(const Coord& where)
@@ -69,10 +69,6 @@ void Board::setApple(const Coord& where)
     if(brd[where.y][where.x] == ' ')
     {
         setCell(where, '@');
-    }
-    else
-    {
-        setApple(where);
     }
 }
 

@@ -3,6 +3,8 @@
 #include "Board.hpp"
 #include <cstdlib>
 #include <ctime>
+#include <unistd.h>
+#include <termios.h>
 
 class Game
 {
@@ -29,6 +31,7 @@ public:
     void makeAMove(const Direction& dir);
     void addApple();
     void refresh();
+    char getch();
 
     bool isOver;
     bool applePlaced;

@@ -20,7 +20,7 @@ public:
     void initializeBoard();
     void clearCell(const Coord& where);
     void setApple(const Coord& where);
-    bool movePossible(const Coord& where);
+    bool checkAvailability(const Coord& where);
     bool appleFound(const Coord& where);
 
 private:
