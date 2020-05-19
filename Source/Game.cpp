@@ -100,8 +100,8 @@ void Game::refresh()
 {
     board.putSnake(snake);
     board.printBoard();
-    std::cout << "Turn:  " << turn << std::endl;
-    std::cout << "Score: " << score << std::endl;
+    std::cout << "Use (W/A/S/D) to play" << std::endl;
+    std::cout << "Turn: " << turn  << "   Score: " << score << "   Best score: " << bestScore << std::endl;
 }
 
 char Game::getch(void)
@@ -169,6 +169,7 @@ void Game::levelMenu()
     turn = 0;
     score = 0;
     previousDirection = Up;
+    bestScore = getBestScore();
 
     system("clear");
 
@@ -218,6 +219,18 @@ void Game::gameOver()
     system("clear");
 
     std::cout << "GAME OVER!" << std::endl;
+    std::cout << "Turn: " << turn << std::endl;
+    std::cout << "Score: " << score << std::endl;
+
+    if(score > bestScore)
+    {
+        setBestScore(score);
+        bestScore = getBestScore();
+        std::cout << "NEW RECORD! ";
+    }
+
+    std::cout << "Best score: " << bestScore << std::endl << std::endl;
+
     std::cout << "Do you want to play again?" << std::endl;
     std::cout << "1. Yes" << std::endl;
     std::cout << "2. No" << std::endl;
@@ -232,4 +245,35 @@ void Game::gameOver()
         default:
             gameOver();
     }
+}
+
+int Game::getBestScore()
+{
+    int score;
+    std::ifstream input("../Source/bestScore.score");
+    if(input)
+    {
+        input >> score;
+    }
+    else
+    {
+       std::cout << "getBestScore: bestScore can't be found!" << std::endl;
+       return 0;
+    }
+    input.close();
+    return score;
+}
+
+void Game::setBestScore(const int & scr)
+{
+    std::ofstream output("../Source/bestScore.score");
+    if(output)
+    {
+        output << scr;
+    }
+    else
+    {
+        std::cout << "setBestScoreEver: bestScore can't be found!" << std::endl;
+    }
+    output.close();
 }

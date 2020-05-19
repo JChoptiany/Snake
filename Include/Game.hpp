@@ -5,6 +5,7 @@
 #include <ctime>
 #include <unistd.h>
 #include <termios.h>
+#include <fstream>
 
 class Game
 {
@@ -38,7 +39,10 @@ public:
     void setLevel(const Level& lvl);
     void play();
     void gameOver();
+    int getBestScore();
+    void setBestScore(const int& scr);
 
+    int bestScore;
     bool isOver;
     bool applePlaced;
     int turn;
