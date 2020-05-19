@@ -162,6 +162,10 @@ void Game::setLevel(const Level& lvl)
 
 void Game::levelMenu()
 {
+    isOver = false;
+    board.initializeBoard();
+    snake = {Coord(10,5), Coord(10,6)};
+
     system("clear");
 
     std::cout << "Choose level:" << std::endl;
@@ -182,5 +186,46 @@ void Game::levelMenu()
             break;
         default:
             levelMenu();
+    }
+
+    play();
+}
+
+void Game::play()
+{
+    refresh();
+
+    while(!isOver)
+    {
+        makeAMove(getDirection());
+        refresh();
+        if(!applePlaced)
+        {
+            addApple();
+        }
+        ++turn;
+    }
+
+   gameOver();
+}
+
+void Game::gameOver()
+{
+    system("clear");
+
+    std::cout << "GAME OVER!" << std::endl;
+    std::cout << "Do you want to play again?" << std::endl;
+    std::cout << "1. Yes" << std::endl;
+    std::cout << "2. No" << std::endl;
+
+    switch(getch())
+    {
+        case '1':
+            levelMenu();
+            break;
+        case '2':
+            exit(0);
+        default:
+            gameOver();
     }
 }

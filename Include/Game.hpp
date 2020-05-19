@@ -11,12 +11,11 @@ class Game
 public:
     Game()
     {
-        isOver = false;
+        srand(time(nullptr));
         applePlaced = false;
         turn = 0;
         score = 0;
         previousDirection = Up;
-        board.initializeBoard();
     }
 
     enum Level
@@ -41,12 +40,14 @@ public:
     char getch();
     void levelMenu();
     void setLevel(const Level& lvl);
+    void play();
+    void gameOver();
 
     bool isOver;
     bool applePlaced;
     int turn;
     int score;
     Board board;
-    SnakeBody snake{Coord(10,5), Coord(10,6)};
+    SnakeBody snake;
     Direction previousDirection;
 };
