@@ -165,6 +165,10 @@ void Game::levelMenu()
     isOver = false;
     board.initializeBoard();
     snake = {Coord(10,5), Coord(10,6)};
+    applePlaced = false;
+    turn = 0;
+    score = 0;
+    previousDirection = Up;
 
     system("clear");
 

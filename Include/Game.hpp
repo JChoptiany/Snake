@@ -12,10 +12,6 @@ public:
     Game()
     {
         srand(time(nullptr));
-        applePlaced = false;
-        turn = 0;
-        score = 0;
-        previousDirection = Up;
     }
 
     enum Level

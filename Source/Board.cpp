@@ -3,6 +3,7 @@
 void Board::printBoard()
 {
     system("clear");
+
     for(int x = 0; x < BOARD_HEIGHT; x++)
     {
         for(int y = 0; y < BOARD_WIDTH; y++)
