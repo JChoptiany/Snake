@@ -19,6 +19,13 @@ public:
         board.initializeBoard();
     }
 
+    enum Level
+    {
+        Easy,
+        Medium,
+        Hard
+    };
+
     enum Direction
     {
         Up,
@@ -32,6 +39,8 @@ public:
     void addApple();
     void refresh();
     char getch();
+    void levelMenu();
+    void setLevel(const Level& lvl);
 
     bool isOver;
     bool applePlaced;

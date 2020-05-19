@@ -22,6 +22,7 @@ public:
     void setApple(const Coord& where);
     bool checkAvailability(const Coord& where);
     bool appleFound(const Coord& where);
+    void setWall(const Coord& where);
 
 private:
     void makeFrame();

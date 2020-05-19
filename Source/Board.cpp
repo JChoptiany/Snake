@@ -1,8 +1,8 @@
-#include "../Include/Board.hpp"
+#include "Board.hpp"
 
 void Board::printBoard()
 {
-    //system("clear");
+    system("clear");
     for(int x = 0; x < BOARD_HEIGHT; x++)
     {
         for(int y = 0; y < BOARD_WIDTH; y++)
@@ -75,4 +75,12 @@ void Board::setApple(const Coord& where)
 bool Board::appleFound(const Coord& where)
 {
     return (brd[where.y][where.x] == '@');
+}
+
+void Board::setWall(const Coord &where)
+{
+    if(brd[where.y][where.x] == ' ')
+    {
+        setCell(where, '#');
+    }
 }

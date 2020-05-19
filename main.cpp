@@ -1,10 +1,11 @@
-#include "Include/Game.hpp"
+#include "Game.hpp"
 
 int main()
 {
     srand(time(nullptr));
 
     Game game;
+    game.levelMenu();
     game.refresh();
 
     while(!game.isOver)

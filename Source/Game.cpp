@@ -126,3 +126,61 @@ char Game::getch(void)
     printf("%c\n", buf);
     return buf;
 }
+
+void Game::setLevel(const Level& lvl)
+{
+    int wallsPlaced = 0;
+    int wallsToBePlaced = 0;
+    int randomX;
+    int randomY;
+
+    switch(lvl)
+    {
+        case Easy:
+            wallsToBePlaced = 5;
+            break;
+        case Medium:
+            wallsToBePlaced = 10;
+            break;
+        case Hard:
+            wallsToBePlaced = 15;
+            break;
+    }
+
+    while(wallsPlaced < wallsToBePlaced)
+    {
+        randomX = rand() % (board.BOARD_WIDTH - 1) + 1;
+        randomY = rand() % (board.BOARD_HEIGHT - 1) + 1;
+        if(board.checkAvailability(Coord(randomX, randomY)))
+        {
+            board.setWall(Coord(randomX, randomY));
+            ++wallsPlaced;
+        }
+    }
+
+}
+
+void Game::levelMenu()
+{
+    system("clear");
+
+    std::cout << "Choose level:" << std::endl;
+    std::cout << "1) Easy" << std::endl;
+    std::cout << "2) Medium" << std::endl;
+    std::cout << "3) Hard" << std::endl;
+
+    switch(getch())
+    {
+        case '1':
+            setLevel(Easy);
+            break;
+        case '2':
+            setLevel(Medium);
+            break;
+        case '3':
+            setLevel(Hard);
+            break;
+        default:
+            levelMenu();
+    }
+}
