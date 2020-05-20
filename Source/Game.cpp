@@ -70,7 +70,7 @@ void Game::makeAMove(const Direction& dir)
             else
             {
                 ++score;
-                applePlaced = false;
+                addApple();
             }
             previousDirection = dir;
         }
@@ -88,7 +88,6 @@ void Game::addApple()
     if(board.checkAvailability(Coord(randomX, randomY)))
     {
         board.setApple(Coord(randomX, randomY));
-        applePlaced = true;
     }
     else
     {
@@ -165,7 +164,6 @@ void Game::levelMenu()
     isOver = false;
     board.initializeBoard();
     snake = {Coord(10,5), Coord(10,6)};
-    applePlaced = false;
     turn = 0;
     score = 0;
     previousDirection = Up;
@@ -199,16 +197,11 @@ void Game::levelMenu()
 void Game::play()
 {
     refresh();
-
+    addApple();
     while(!isOver)
     {
         makeAMove(getDirection());
         refresh();
-        if(!applePlaced)
-        {
-            addApple();
-        }
-        ++turn;
     }
 
    gameOver();

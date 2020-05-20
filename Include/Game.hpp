@@ -44,7 +44,6 @@ public:
 
     int bestScore;
     bool isOver;
-    bool applePlaced;
     int turn;
     int score;
     Board board;
