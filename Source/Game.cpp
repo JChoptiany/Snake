@@ -87,7 +87,15 @@ void Game::addApple()
     int randomY = rand() % (board.BOARD_HEIGHT - 1) + 1;
     if(board.checkAvailability(Coord(randomX, randomY)))
     {
-        board.setApple(Coord(randomX, randomY));
+        if(checkIfNotDeadEnd(Coord(randomX, randomY)))
+        {
+            board.setApple(Coord(randomX, randomY));
+        }
+        else
+        {
+            addApple();
+        }
+
     }
     else
     {
@@ -212,13 +220,13 @@ void Game::gameOver()
     system("clear");
 
     std::cout << "GAME OVER!" << std::endl;
-    std::cout << "Turn: " << turn << std::endl;
+
     std::cout << "Score: " << score << std::endl;
 
     if(score > bestScore)
     {
         setBestScore(score);
-        bestScore = getBestScore();
+        bestScore = score;
         std::cout << "NEW RECORD! ";
     }
 
@@ -269,4 +277,16 @@ void Game::setBestScore(const int & scr)
         std::cout << "setBestScoreEver: bestScore can't be found!" << std::endl;
     }
     output.close();
+}
+
+bool Game::checkIfNotDeadEnd(const Coord& where)
+{
+    int clearCells = 0;
+
+    clearCells += board.checkAvailability(Coord(where.x + 1, where.y));
+    clearCells += board.checkAvailability(Coord(where.x - 1, where.y));
+    clearCells += board.checkAvailability(Coord(where.x, where.y + 1));
+    clearCells += board.checkAvailability(Coord(where.x, where.y - 1));
+
+    return (clearCells > 2);
 }

@@ -10,11 +10,6 @@
 class Game
 {
 public:
-    Game()
-    {
-        srand(time(nullptr));
-    }
-
     enum Level
     {
         Easy,
@@ -41,6 +36,7 @@ public:
     void gameOver();
     int getBestScore();
     void setBestScore(const int& scr);
+    bool checkIfNotDeadEnd(const Coord& where);
 
     int bestScore;
     bool isOver;
