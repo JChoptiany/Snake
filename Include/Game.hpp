@@ -10,6 +10,9 @@
 class Game
 {
 public:
+    void levelMenu();
+
+private:
     enum Level
     {
         Easy,
@@ -30,7 +33,6 @@ public:
     void addApple();
     void refresh();
     char getch();
-    void levelMenu();
     void setLevel(const Level& lvl);
     void play();
     void gameOver();
@@ -38,11 +40,11 @@ public:
     void setBestScore(const int& scr);
     bool checkIfNotDeadEnd(const Coord& where);
 
+    Direction previousDirection;
+    SnakeBody snake;
     int bestScore;
     bool isOver;
     int turn;
     int score;
     Board board;
-    SnakeBody snake;
-    Direction previousDirection;
 };

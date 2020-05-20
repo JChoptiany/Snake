@@ -1,5 +1,40 @@
 #include "Game.hpp"
 
+void Game::levelMenu()
+{
+    isOver = false;
+    board.initializeBoard();
+    snake = {Coord(10,5), Coord(10,6)};
+    turn = 0;
+    score = 0;
+    previousDirection = Up;
+    bestScore = getBestScore();
+
+    system("clear");
+
+    std::cout << "Choose level:" << std::endl;
+    std::cout << "1) Easy" << std::endl;
+    std::cout << "2) Medium" << std::endl;
+    std::cout << "3) Hard" << std::endl;
+
+    switch(getch())
+    {
+        case '1':
+            setLevel(Easy);
+            break;
+        case '2':
+            setLevel(Medium);
+            break;
+        case '3':
+            setLevel(Hard);
+            break;
+        default:
+            levelMenu();
+    }
+
+    play();
+}
+
 Game::Direction Game::getDirection()
 {
     char key;
@@ -130,7 +165,6 @@ char Game::getch(void)
     old.c_lflag |= ECHO;
     if(tcsetattr(0, TCSADRAIN, &old) < 0)
         perror("tcsetattr ~ICANON");
-    printf("%c\n", buf);
     return buf;
 }
 
@@ -165,41 +199,6 @@ void Game::setLevel(const Level& lvl)
         }
     }
 
-}
-
-void Game::levelMenu()
-{
-    isOver = false;
-    board.initializeBoard();
-    snake = {Coord(10,5), Coord(10,6)};
-    turn = 0;
-    score = 0;
-    previousDirection = Up;
-    bestScore = getBestScore();
-
-    system("clear");
-
-    std::cout << "Choose level:" << std::endl;
-    std::cout << "1) Easy" << std::endl;
-    std::cout << "2) Medium" << std::endl;
-    std::cout << "3) Hard" << std::endl;
-
-    switch(getch())
-    {
-        case '1':
-            setLevel(Easy);
-            break;
-        case '2':
-            setLevel(Medium);
-            break;
-        case '3':
-            setLevel(Hard);
-            break;
-        default:
-            levelMenu();
-    }
-
-    play();
 }
 
 void Game::play()
