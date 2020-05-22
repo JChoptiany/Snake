@@ -54,7 +54,7 @@ Game::Direction Game::getDirection()
     }
 }
 
-void Game::makeAMove(const Direction& dir)
+void Game::makeAMove(const Direction dir)
 {
     if((dir == Up && previousDirection == Down) || (dir == Down && previousDirection == Up) || (dir == Left && previousDirection == Right) || (dir == Right && previousDirection == Left))
     {
@@ -168,7 +168,7 @@ char Game::getch(void)
     return buf;
 }
 
-void Game::setLevel(const Level& lvl)
+void Game::setLevel(const Level lvl)
 {
     int wallsPlaced = 0;
     int wallsToBePlaced = 0;
@@ -264,7 +264,7 @@ int Game::getBestScore()
     return score;
 }
 
-void Game::setBestScore(const int & scr)
+void Game::setBestScore(const int scr)
 {
     std::ofstream output("../Source/bestScore.score");
     if(output)
@@ -278,7 +278,7 @@ void Game::setBestScore(const int & scr)
     output.close();
 }
 
-bool Game::checkIfNotDeadEnd(const Coord& where)
+bool Game::checkIfNotDeadEnd(const Coord where)
 {
     int clearCells = 0;
 

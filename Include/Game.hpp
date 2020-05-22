@@ -29,16 +29,16 @@ private:
     };
 
     Direction getDirection();
-    void makeAMove(const Direction& dir);
+    void makeAMove(const Direction dir);
     void addApple();
     void refresh();
     char getch();
-    void setLevel(const Level& lvl);
+    void setLevel(const Level lvl);
     void play();
     void gameOver();
     int getBestScore();
-    void setBestScore(const int& scr);
-    bool checkIfNotDeadEnd(const Coord& where);
+    void setBestScore(const int scr);
+    bool checkIfNotDeadEnd(const Coord where);
 
     Direction previousDirection;
     SnakeBody snake;

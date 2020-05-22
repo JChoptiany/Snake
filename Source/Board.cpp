@@ -50,22 +50,22 @@ void Board::makeFrame()
     }
 }
 
-void Board::setCell(const Coord& where, const char& what)
+void Board::setCell(const Coord where, const char what)
 {
     brd[where.y][where.x] = what;
 }
 
-void Board::clearCell(const Coord& where)
+void Board::clearCell(const Coord where)
 {
     setCell(where, ' ');
 }
 
-bool Board::checkAvailability(const Coord& where)
+bool Board::checkAvailability(const Coord where)
 {
     return brd[where.y][where.x] != 's' && brd[where.y][where.x] != '#' && brd[where.y][where.x] != 'S';
 }
 
-void Board::setApple(const Coord& where)
+void Board::setApple(const Coord where)
 {
     if(brd[where.y][where.x] == ' ')
     {
@@ -73,12 +73,12 @@ void Board::setApple(const Coord& where)
     }
 }
 
-bool Board::appleFound(const Coord& where)
+bool Board::appleFound(const Coord where)
 {
     return (brd[where.y][where.x] == '@');
 }
 
-void Board::setWall(const Coord &where)
+void Board::setWall(const Coord where)
 {
     if(brd[where.y][where.x] == ' ')
     {
