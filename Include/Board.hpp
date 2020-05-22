@@ -16,17 +16,17 @@ public:
     void printBoard();
     void putSnake(const SnakeBody& snake);
     void initializeBoard();
-    bool appleFound(const Coord where);
-    bool checkAvailability(const Coord where);
-    void clearCell(const Coord where);
-    void setApple(const Coord where);
-    void setWall(const Coord where);
+    bool appleFound(Coord where);
+    bool checkAvailability(Coord where);
+    void clearCell(Coord where);
+    void setApple(Coord where);
+    void setWall(Coord where);
 
 private:
     typedef std::array<std::array<char, BOARD_WIDTH>, BOARD_HEIGHT> GameBoardArray;
 
     void makeFrame();
-    void setCell(const Coord where, const char what);
+    void setCell(Coord where, char what);
 
     GameBoardArray brd;
 };

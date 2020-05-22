@@ -1,8 +1,7 @@
 #pragma once
 
 #include "Board.hpp"
-#include <cstdlib>
-#include <ctime>
+#include <random>
 #include <unistd.h>
 #include <termios.h>
 #include <fstream>
@@ -13,6 +12,8 @@ public:
     void levelMenu();
 
 private:
+    std::random_device rd;
+
     enum Level
     {
         Easy,
@@ -29,16 +30,16 @@ private:
     };
 
     Direction getDirection();
-    void makeAMove(const Direction dir);
+    void makeAMove(Direction dir);
     void addApple();
     void refresh();
-    char getch();
-    void setLevel(const Level lvl);
+    static char getch();
+    void setLevel(Level lvl);
     void play();
     void gameOver();
-    int getBestScore();
-    void setBestScore(const int scr);
-    bool checkIfNotDeadEnd(const Coord where);
+    static int getBestScore();
+    static void setBestScore(int scr);
+    bool checkIfNotDeadEnd(Coord where);
 
     Direction previousDirection;
     SnakeBody snake;

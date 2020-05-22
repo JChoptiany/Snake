@@ -62,8 +62,8 @@ void Game::makeAMove(const Direction dir)
     }
     else
     {
-        int nextX;
-        int nextY;
+        unsigned nextX;
+        unsigned nextY;
         switch(dir)
         {
                 case Up:
@@ -118,8 +118,13 @@ void Game::makeAMove(const Direction dir)
 
 void Game::addApple()
 {
-    int randomX = rand() % (board.BOARD_WIDTH - 1) + 1;
-    int randomY = rand() % (board.BOARD_HEIGHT - 1) + 1;
+    std::mt19937 rng(rd());
+    std::uniform_int_distribution<unsigned> rand_X(1, board.BOARD_WIDTH - 1);
+    std::uniform_int_distribution<unsigned> rand_Y(1, board.BOARD_HEIGHT - 1);
+
+    unsigned randomX = rand_X(rng);
+    unsigned randomY = rand_Y(rng);
+
     if(board.checkAvailability(Coord(randomX, randomY)))
     {
         if(checkIfNotDeadEnd(Coord(randomX, randomY)))
@@ -190,8 +195,13 @@ void Game::setLevel(const Level lvl)
 
     while(wallsPlaced < wallsToBePlaced)
     {
-        randomX = rand() % (board.BOARD_WIDTH - 1) + 1;
-        randomY = rand() % (board.BOARD_HEIGHT - 1) + 1;
+        std::mt19937 rng(rd());
+        std::uniform_int_distribution<unsigned> rand_X(1, board.BOARD_WIDTH - 1);
+        std::uniform_int_distribution<unsigned> rand_Y(1, board.BOARD_HEIGHT - 1);
+
+        randomX = rand_X(rng);
+        randomY = rand_Y(rng);
+
         if(board.checkAvailability(Coord(randomX, randomY)))
         {
             board.setWall(Coord(randomX, randomY));
