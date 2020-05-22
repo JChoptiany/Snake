@@ -94,7 +94,7 @@ void Game::makeAMove(const Direction& dir)
 
         Coord nextCoord(nextX, nextY);
 
-        if(board.checkAvailability(nextCoord))
+        if(board.checkAvailability(nextCoord) || (nextX == snake.back().x && nextY == snake.back().y))
         {
             snake.push_front(nextCoord);
             if(!board.appleFound(nextCoord))
